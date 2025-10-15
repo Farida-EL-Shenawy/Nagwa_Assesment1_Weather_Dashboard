@@ -1,0 +1,193 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+/* --- Keyframe Animations --- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes moveCloud { from { transform: translateX(-150%); } to { transform: translateX(150%); } }
+/* **NEW**: A more modern, subtle "sun rays" animation */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- Body & Animated Background --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 1rem;
+    min-height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0c0e1a;
+    transition: background 1.5s ease;
+}
+.is-clear { background: linear-gradient(to top, #2980b9, #6dd5fa); }
+.is-scattered-clouds { background: linear-gradient(to top, #56B4D3, #87CEEB); }
+.is-clouds, .is-mist { background: linear-gradient(to top, #606c88, #3f4c6b); }
+.is-rain { background: linear-gradient(to top, #09203f, #537895); }
+.is-snow { background: linear-gradient(to top, #34495e, #5d6d7e); }
+
+.animation-container {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+}
+
+.sun, .cloud, .rain-drop, .snow-flake { display: none; }
+.is-clear .sun, .is-clouds .cloud, .is-rain .rain-drop, .is-snow .snow-flake, .is-mist .cloud, .is-scattered-clouds .sun, .is-scattered-clouds .cloud { display: block; }
+
+/* --- Animated Elements --- */
+/* **NEW**: A modern, animated sun with rotating rays */
+.sun {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 120px;
+    height: 120px;
+    background: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+}
+
+/* Create the rays using pseudo-elements */
+.sun::before,
+.sun::after {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    width: 200px;
+    height: 200px;
+    background-image: 
+        radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 215, 0, 0) 50%),
+        repeating-conic-gradient(rgba(255, 215, 0, 0.3) 0% 5%, transparent 5% 10%);
+    border-radius: 50%;
+    animation: spin-slow 30s linear infinite;
+}
+
+.sun::after {
+    animation-delay: -15s; /* Offset the second set of rays */
+}
+
+.cloud { position: absolute; width: 250px; height: 150px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 120'%3E%3Cpath fill-opacity='0.8' fill='white' d='M171.3 62.2C170.1 27.2 142.1 0 107.1 0 83.1 0 62.2 13.1 51.7 32.2C22.7 34.6 0 59.6 0 89.6 0 106.3 13.1 119.5 29.8 119.5h130.4c21.9 0 39.8-17.9 39.8-39.8 0-19.5-14.3-35.8-32.7-38.9z'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; animation: moveCloud 20s linear infinite; }
+.cloud.c1 { top: 10%; animation-duration: 25s; }
+.cloud.c2 { top: 25%; animation-duration: 35s; animation-delay: -5s; transform: scale(0.6); opacity: 0.8; }
+.rain-drop { position: absolute; width: 2px; height: 15px; background: rgba(255,255,255,0.6); animation: rainFall 1s linear infinite; }
+.snow-flake { position: absolute; width: 8px; height: 8px; background: white; border-radius: 50%; animation: rainFall 10s linear infinite; }
+
+/* --- Main Content, Loading & Error --- */
+.main-container { display: flex; flex-direction: column; align-items: center; width: 100%; position: relative; z-index: 2; }
+#loading-indicator { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; }
+.loader-icon { font-size: 4rem; color: #ffffff; animation: spin 1.5s linear infinite; }
+#error-container { background: rgba(220, 53, 69, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(220, 53, 69, 0.6); border-radius: 15px; padding: 1rem 1.5rem; margin-bottom: 2rem; max-width: 420px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+
+/* --- Modern Glassmorphism Card --- */
+#weather-card {
+    background: rgba(25, 25, 25, 0.4);
+    backdrop-filter: blur(25px) saturate(1.8); -webkit-backdrop-filter: blur(25px) saturate(1.8);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 420px;
+    visibility: hidden;
+}
+#weather-card.visible { visibility: visible; }
+#weather-card > * { opacity: 0; }
+#weather-card.visible #weather-icon, #weather-card.visible #city-name, #weather-card.visible #temperature-val, #weather-card.visible #description-val, #weather-card.visible .details { animation: slideUp 0.6s ease-out forwards; }
+#weather-card.visible #city-name { animation-delay: 0.1s; }
+#weather-card.visible #temperature-val { animation-delay: 0.2s; }
+#weather-card.visible #description-val { animation-delay: 0.3s; }
+#weather-card.visible .details { animation-delay: 0.4s; }
+
+/* --- Typography & Icons --- */
+#weather-icon { font-size: 5.5rem; margin-bottom: 1rem; }
+.is-clear #weather-icon, .is-scattered-clouds #weather-icon { color: #FFD700; }
+.is-clouds #weather-icon, .is-mist #weather-icon { color: #BBDEFB; }
+.is-rain #weather-icon { color: #64B5F6; }
+.is-snow #weather-icon { color: #E0F2F7; }
+
+#city-name, #temperature-val, #description-val { margin: 0; text-shadow: 2px 2px 8px rgba(0,0,0,0.4); }
+#city-name { font-size: 2.7rem; font-weight: 700; }
+#temperature-val { font-size: 5.5rem; font-weight: 700; }
+#description-val { font-size: 1.35rem; text-transform: capitalize; margin-top: 0.5rem; }
+.details { display: flex; justify-content: space-around; font-size: 1.1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+
+/* --- **THE DEFINITIVE FORM FIX** --- */
+.hidden { display: none !important; }
+
+#manual-input-form {
+    /* REMOVED width & max-width so the parent .main-container can center it */
+    margin-top: 2rem;
+    display: flex; /* This is the key for side-by-side layout */
+    align-items: center; /* This vertically centers the items inside */
+    border-radius: 50px; /* Creates the pill shape */
+    background: rgba(25, 25, 25, 0.4);
+    backdrop-filter: blur(25px) saturate(1.8);
+    -webkit-backdrop-filter: blur(25px) saturate(1.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    padding: 0.4rem; /* Add a small padding around the inside of the form */
+    transition: box-shadow 0.3s ease;
+}
+
+#manual-input-form:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+#city-input {
+    flex-grow: 1; /* Allows the input to take up all available space */
+    border: none;
+    background: transparent;
+    padding: 0.8rem 1.5rem;
+    color: white;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    min-width: 200px; /* Give the input a minimum sensible width */
+}
+#city-input:focus {
+    outline: none;
+}
+#city-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#manual-input-form button {
+    border: none;
+    background: #ffffff;
+    color: #333;
+    font-weight: bold;
+    padding: 0.8rem 2rem; /* Symmetrical padding */
+    border-radius: 50px; /* Matches the parent pill shape */
+    cursor: pointer;
+    white-space: nowrap; /* Prevents "Get Weather" from wrapping */
+    transition: all 0.2s ease;
+}
+
+#manual-input-form button:hover {
+    background: #f0f0f0;
+    transform: scale(1.03);
+}
+
+/* **FIX #1**: Responsive adjustments for smaller screens */
+@media (max-height: 750px) {
+    #weather-card {
+        padding: 1.5rem;
+        transform: scale(0.9);
+    }
+    #temperature-val {
+        font-size: 4.5rem;
+    }
+    #manual-input-form {
+        margin-top: 1.5rem;
+        transform: scale(0.9);
+    }
+}

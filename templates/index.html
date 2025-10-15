@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- **FIX #4**: New, catchy app name -->
+    <title>Weather Glimpse</title>
+    
+    <!-- **FIX #4**: New, self-contained animated SVG icon for the browser tab -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cstyle%3E.sun%7Bfill:%23FFD700;%7D.cloud%7Bfill:%23FFF;fill-opacity:0.9;%7D%3C/style%3E%3C/defs%3E%3Ccircle class='sun' cx='50' cy='50' r='25'/%3E%3Cpath class='cloud' d='M73.6 52.9c-.5-14.8-12.7-26.7-27.5-26.7-9.9 0-18.6 5.6-22.9 13.8-12.4.9-22.3 11.6-22.3 24.4 0 7.2 2.5 13.7 6.6 18.7h55.2c9.2 0 16.7-7.5 16.7-16.7-.1-8.3-6.2-15.2-14.4-16.3z'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Cache busting version updated to 1.13 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=1.13">
+</head>
+<body>
+    <div class="animation-container"></div>
+
+    <div id="loading-indicator">
+        <i class="fas fa-spinner loader-icon"></i>
+        <p>Finding Your Weather...</p>
+    </div>
+
+    <main class="main-container hidden">
+        <div id="error-container" class="hidden">
+            <p>City not found. Please try another location.</p>
+        </div>
+        <div id="weather-card">
+            <i id="weather-icon" class="fas"></i>
+            <h1 id="city-name">--</h1>
+            <p id="temperature-val">--°</p>
+            <p id="description-val">--</p>
+            <div class="details">
+                <p>Humidity: <span id="humidity-val">--</span>%</p>
+                <p>Wind Speed: <span id="wind-speed-val">--</span> km/h</p>
+            </div>
+        </div>
+        <form id="manual-input-form">
+            <input type="text" id="city-input" placeholder="Enter another city..." required>
+            <button type="submit">Get Weather</button>
+        </form>
+    </main>
+
+    <!-- Cache busting version updated to 1.13 -->
+    <script src="{{ url_for('static', filename='script.js') }}?v=1.13"></script>
+</body>
+</html>
