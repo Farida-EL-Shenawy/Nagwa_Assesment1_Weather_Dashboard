@@ -1,4 +1,4 @@
-🌦️ WeatherGlimpse: A Dynamic, Animated Weather Dashboard
+🌦️ **WeatherGlimpse** : A Dynamic, Animated Weather Dashboard
 A modern, responsive single-page web application that delivers a visually immersive and user-friendly weather forecast, built with Python/Flask and Vanilla JavaScript.
 
 ✨ Key Features
@@ -27,47 +27,54 @@ API: OpenWeatherMap for weather data.
 
 Environment: Securely managed with python-dotenv.
 
-🚀 Getting Started: A Step-by-Step Guide
-This project requires Python 3.13.
+🚀 **Getting Started:** A Step-by-Step Guide
+   This project requires Python 3.13.
 
-1. Clone or Download the Repository
-First, get the code onto your local machine.
+   1. Clone or Download the Repository
+      First, get the code onto your local machine.
 
-2. Navigate to the Project Folder
-Open your terminal and change into the weather_dashboard directory.
+   2. Navigate to the Project Folder
+     Open your terminal and change into the weather_dashboard directory.
 
-cd path/to/weather_dashboard
+   cd path/to/weather_dashboard
 
-3. Create and Activate the Virtual Environment
-On Windows:
+   3. Create and Activate the Virtual Environment
 
-py -3.13 -m venv .venv
-.venv\Scripts\activate
+  On Windows:
 
-On macOS / Linux:
+     py -3.13 -m venv .venv
+     .venv\Scripts\activate
 
-python3.13 -m venv .venv
-source .venv/bin/activate
+   On macOS / Linux:
 
-4. Install Dependencies
-Install all required packages with a single command.
+     python3.13 -m venv .venv
+     source .venv/bin/activate
 
-pip install -r requirements.txt
+  4. Install Dependencies
+  Install all required packages with a single command.
 
-5. Configure Your API Key
-This application requires a free API key from OpenWeatherMap.
+    pip install -r requirements.txt
+
+  5. Configure Your API Key
+ This application requires a free API key from OpenWeatherMap.
 
 Get Your Key: Sign up at OpenWeatherMap.org and find your API key on your dashboard.
 
-Configure: In the project folder, rename the .env.example file to .env. Open this new .env file and paste in your key:
+Configure: In the project folder, rename the .env.example file to .env. 
+Open this new .env file and paste in your key:
 
-OPENWEATHER_API_KEY='your-actual-api-key-goes-here'
+    OPENWEATHER_API_KEY='your-actual-api-key-goes-here'
 
 6. Run the Application
 Once setup is complete, run the following command in your terminal:
 
-flask run
+        flask run
+OR
+       
+        python app.py
+
 
 The application will now be running. Open your web browser and go to:
 
-http://12.0.0.1:5000
+     http://12.0.0.1:5000
+
