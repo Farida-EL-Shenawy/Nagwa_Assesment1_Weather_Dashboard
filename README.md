@@ -1,7 +1,7 @@
-🌦️ **WeatherGlimpse** : A Dynamic, Animated Weather Dashboard
+# 🌦️WeatherGlimpse : A Dynamic, Animated Weather Dashboard
 A modern, responsive single-page web application that delivers a visually immersive and user-friendly weather forecast, built with Python/Flask and Vanilla JavaScript.
 
-✨ Key Features
+## ✨ Key Features
 High-Accuracy Geolocation: Prioritizes the browser's GPS for precise, real-time location detection.
 
 Intelligent Animated Backgrounds: The UI background is a pure CSS animation that logically and beautifully changes to reflect the current weather (e.g., a shining sun for clear skies, moving clouds for overcast, and both for scattered clouds).
@@ -16,18 +16,18 @@ Robust Error Handling: Gracefully handles invalid city names and geolocation fai
 
 Fully Responsive: The layout adapts elegantly to smaller screen heights, ensuring all content remains visible without zooming.
 
-🛠️ Tech Stack & Architecture
-Backend: Python 3.13 with Flask for serving a lightweight REST API.
+## 🛠️ Tech Stack & Architecture
+  ### Backend: Python 3.13 with Flask for serving a lightweight REST API.
 
-Frontend: Vanilla JavaScript (ES6+) for asynchronous data fetching and DOM manipulation.
+  ### Frontend: Vanilla JavaScript (ES6+) for asynchronous data fetching and DOM manipulation.
 
-Styling: Pure CSS with advanced techniques like keyframes for animations and backdrop-filter for the glassmorphism effect.
+  ### Styling: Pure CSS with advanced techniques like keyframes for animations and backdrop-filter for the glassmorphism effect.
 
-API: OpenWeatherMap for weather data.
+  ### API: OpenWeatherMap for weather data.
 
-Environment: Securely managed with python-dotenv.
+  ### Environment: Securely managed with python-dotenv.
 
-🚀 **Getting Started:** A Step-by-Step Guide
+## 🚀 **Getting Started:** A Step-by-Step Guide
    This project requires Python 3.13.
 
    1. Clone or Download the Repository
@@ -77,4 +77,5 @@ OR
 The application will now be running. Open your web browser and go to:
 
      http://12.0.0.1:5000
+
 
